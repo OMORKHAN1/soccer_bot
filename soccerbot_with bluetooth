@@ -1,0 +1,92 @@
+// to identify your left and right input. find outpin pin.
+
+// left motor
+int Ena = 10;
+int in1 = 7;
+int in2 = 6; // output 1 & 2 with my left motor and in 1 & 2 is connected with output 1 & 2. so input 1 & 2 are controlling my left motor
+
+// right motor
+
+int Enb = 9;
+int in3 = 5;
+int in4 = 4; // out 3 & output 4 - in 3 & in 4
+
+void setup() {
+
+  Serial.begin(9600);
+  pinMode(Ena, OUTPUT);
+  pinMode(Enb, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+}
+
+void loop() {
+  if (Serial.available()) {
+    char data = Serial.read();
+    //Serial.println(data);
+    if (data == 'F') {
+      forward();
+    } else if (data == 'B') {
+      backward();
+    } else if (data == 'R') {
+      TurnR();
+    } else if (data == 'L') {
+      TurnL();
+    } else {
+      stop();
+    }
+  }
+}
+void forward() {
+  //Left motor
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  analogWrite(Ena, 128);
+  //right motor
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  analogWrite(Enb, 128);
+}
+void backward() {
+  //Left motor
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  analogWrite(Ena, 128);
+  //right motor
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(Enb, 128);
+}
+
+void TurnL() {
+  //Left motor
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  analogWrite(Ena, 128);
+  //right motor
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+  analogWrite(Enb, 128);
+}
+void TurnR() {
+  //Left motor
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  analogWrite(Ena, 128);
+  //right motor
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+  analogWrite(Enb, 128);
+}
+void stop() {
+  analogWrite(Ena, 0);
+  analogWrite(Enb, 0);
+}
+
+
+
+
+
+
