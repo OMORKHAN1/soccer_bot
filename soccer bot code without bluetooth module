@@ -45,8 +45,8 @@ void loop() {
 
    void forward(){
 //left motor
-  digitalWrite(in1,HIGH);
-  digitalWrite(in2,LOW);
+  digitalWrite(in1,HIGH);  // two motors are used here. they are sorted. now one wire at output1 and another at output 2. output 1 - input 1, high voltage. output 2 - input 2, low voltage. voltage diff. created.
+  digitalWrite(in2,LOW); // this voltage difference will rotate wheel forward. ENA getting 128 pwm signal which is providing speed to the forward dorections. 
   analogWrite(Ena,128);
 //right motor
   digitalWrite(in3,LOW);
